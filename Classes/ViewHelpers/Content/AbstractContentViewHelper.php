@@ -181,14 +181,16 @@ abstract class Tx_Vhs_ViewHelpers_Content_AbstractContentViewHelper extends Tx_F
 	 */
 	protected function getRenderedRecords($rows) {
 		$elements = array();
-		foreach ($rows as $row) {
-			$conf = array(
-				'tables' => 'tt_content',
-				'source' => $row['uid'],
-				'dontCheckPid' => 1
-			);
-			array_push($elements, $GLOBALS['TSFE']->cObj->RECORDS($conf));
-		}
+        if(is_array($rows)) {
+            foreach ($rows as $row) {
+                $conf = array(
+                    'tables' => 'tt_content',
+                    'source' => $row['uid'],
+                    'dontCheckPid' => 1
+                );
+                array_push($elements, $GLOBALS['TSFE']->cObj->RECORDS($conf));
+            }
+        }
 		return $elements;
 	}
 
